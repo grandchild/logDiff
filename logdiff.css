@@ -1,0 +1,41 @@
+
+body {
+	background: #191919;
+}
+
+div.logdata {
+	float: left;
+	width: 45%;
+}
+div.logdata > textarea {
+	padding: 5px;
+	background: black;
+	color: lightgray;
+	font: 12px monospace;
+	border-radius: 3px;
+	border: 1px solid #282828;
+	box-shadow: inset 0px 0px 1px #777;
+	width: 110%;
+	height: 8200px;
+}
+
+div.content {
+	margin: 10px;
+}
+
+div.main {
+	width: 100%;
+	height: 100%;
+	/*position: relative*/
+}
+div.timediff {
+	padding: 5px;
+	background: black;
+	font: 12px monospace;
+	border-radius: 3px;
+	border: 1px solid #282828;
+	box-shadow: inset 0px 0px 1px #777;
+	float: right;
+	width: 45%;
+	overflow: hidden;
+}
