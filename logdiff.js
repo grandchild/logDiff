@@ -2,6 +2,26 @@
 var diff;
 var enableContentLocation = false;
 
+/*
+(
+	(?:\d\d\d\d-\d\d-\d\d(?: |T)|\w{3} \d{2}(?: \d\d|\d\d\d\d)? )
+		\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|\+\d\d:\d\d)?|
+	\d{13}
+)
+(.*)
+//*/
+var DATEDATAREGEXP = /((?:\d\d\d\d-\d\d-\d\d(?: |T)|\w{3} \d{2}(?: \d\d|\d\d\d\d)? )\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|\+\d\d:\d\d)?|\d{13})(.*)/;
+var DATEFORMATS = [
+	moment.ISO_8601,
+	'YYYY-MM-DD HH:mm:ss',
+	'YYYY-MM-DD HH:mm:ss.SSSS',
+	'MMM DD HH:mm:ss',
+	'MMM DD HH:mm:ss.SSSS',
+	'MMM DD YYYY HH:mm:ss.SSSS',
+	'x'
+];
+
+
 function newDiff(element) {
 	diff = new LogDiff(element.value);
 	diff.show($('div.timediff'));
@@ -22,12 +42,12 @@ LogDiff.prototype = {
 	read: function(rawdata) {
 		var txtLines = rawdata.split('\n');
 		for(var i=0; i<txtLines.length; i++) {
-			var match = txtLines[i].match(/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}(?:.\d+)?|\d{13})(.*)/)
+			var match = txtLines[i].match(DATEDATAREGEXP);
 			if(match!=null) {
 				this.lines.push(
 					new Line(
 						i,
-						moment(match[1], ['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD HH:mm:ss.SSSS', 'x']),
+						moment(match[1], DATEFORMATS),
 						match[2].trim()
 					)
 				);
