@@ -10,11 +10,13 @@ var enableContentLocation = false;
 )
 (.*)
 //*/
-var DATEDATAREGEXP = /((?:\d\d\d\d-\d\d-\d\d(?: |T)|\w{3} \d{2}(?: \d\d|\d\d\d\d)? )\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|\+\d\d:\d\d)?|\d{13})(.*)/;
+var DATEDATAREGEXP = /((?:\d\d\d\d[-/]\d\d[-/]\d\d(?: |T)|\w{3} \d{2}(?: \d\d|\d\d\d\d)? )\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|\+\d\d:\d\d)?|\d{13})(.*)/;
 var DATEFORMATS = [
 	moment.ISO_8601,
 	'YYYY-MM-DD HH:mm:ss',
 	'YYYY-MM-DD HH:mm:ss.SSSS',
+	'YYYY/MM/DD HH:mm:ss',
+	'YYYY/MM/DD HH:mm:ss.SSSS',
 	'MMM DD HH:mm:ss',
 	'MMM DD HH:mm:ss.SSSS',
 	'MMM DD YYYY HH:mm:ss.SSSS',
