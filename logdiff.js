@@ -190,10 +190,10 @@ Line.prototype.toString = function() {
 		}
 	};
 	
-	return '<span class="line time" style="color: '+this.timeColor()+';">'+
+	return '<span class="line time" style="color: ' + this.timeColor() + ';">'+
 				str+
 			'</span>'+
-			'<span class="line data" style="color: hsla(0, 0%, 100%, '+(this.relative*.75+0.25)+');">'+
+			'<span class="line data" style="color: hsla(0, 0%, 100%, ' + (Math.min(1.0 - this.ignored*0.25, this.relative) * .75 + 0.25) + ');">'+
 				this.data+
 			'</span>'+
 			'<br/>';
@@ -201,15 +201,19 @@ Line.prototype.toString = function() {
 Line.prototype.timeColor = function(noAlpha) {
 	var timeSaturation = 100;
 	var timeAlpha = 1;
-	if(this.duration.asMilliseconds()==0 || this.ignored) {
-		relative = 0;
+	if(this.duration.asMilliseconds()==0) {
 		timeSaturation = 0;
 		timeAlpha = 0.5;
+	} else if(this.ignored) {
+		if(noAlpha) {
+			timeSaturation = 60;
+		}
+		timeAlpha = 0.6;
 	}
 	if(noAlpha) {
-		return 'hsl('+parseInt((1.0-this.relative)*115)+', '+timeSaturation+'%, 50%)'
+		return 'hsl('+parseInt((1.0-Math.min(1.0, this.relative))*115)+', '+timeSaturation+'%, 50%)'
 	} else {
-		return 'hsla('+parseInt((1.0-this.relative)*115)+', '+timeSaturation+'%, 50%, '+timeAlpha+')'
+		return 'hsla('+parseInt((1.0-Math.min(1.0, this.relative))*115)+', '+timeSaturation+'%, 50%, '+timeAlpha+')'
 	}
 }
 
