@@ -10,7 +10,7 @@ var enableContentLocation = false;
 )
 (.*)
 //*/
-var DATEDATAREGEXP = /((?:\d\d\d\d[-/]\d\d[-/]\d\d(?: |T)|\w{3} \d{2}(?: \d\d|\d\d\d\d)? )\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|\+\d\d:\d\d)?|\d{13})(.*)/;
+var DATEDATAREGEXP = /((?:\d\d\d\d[-/]\d\d[-/]\d\d(?: |T)|\w{3} \d{2}(?: \d\d|\d\d\d\d)? )\d\d:\d\d:\d\d(?:\.\d+)?(?:Z|\+\d\d:\d\d)?|\d{1,11})(.*)/;
 var DATEFORMATS = [
 	moment.ISO_8601,
 	'YYYY-MM-DD HH:mm:ss',
